@@ -123,19 +123,25 @@ async function displayAlbums(artist) {
 }
 
 async function displayAlbumsData(albums, artistName) {
+  // Create and append the header text element
+  const headerText = document.createElement("h2");
+  headerText.textContent = `Albums by ${artistName}`;
+  headerText.classList.add("albums-header");
+  results.appendChild(headerText);
+
+  // Create and append the albums container element
   const albumsContainer = document.createElement("div");
-  albumsContainer.innerHTML = `<h2>Albums by ${artistName}</h2>`;
-  albumsContainer.classList.add("albums-container"); // Add a container for albums
+  albumsContainer.classList.add("albums-container");
   results.appendChild(albumsContainer);
 
   albums.forEach((album) => {
     const albumDiv = document.createElement("div");
-    albumDiv.classList.add("release"); // Use the same class as artist div for consistent styling
+    albumDiv.classList.add("release");
     albumDiv.innerHTML = `
-        <img src="${album.images[0]?.url || ""}" alt="${album.name}">
-        <h3>${album.name}</h3>
-        <p>Released: ${album.release_date}</p>
-      `;
+          <img src="${album.images[0]?.url || ""}" alt="${album.name}">
+          <h3>${album.name}</h3>
+          <p>Released: ${album.release_date}</p>
+        `;
     albumsContainer.appendChild(albumDiv);
   });
 }
